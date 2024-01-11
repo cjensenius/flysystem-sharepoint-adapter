@@ -19,7 +19,8 @@ class SharepointConnector
         string $tenantId,
         string $clientId,
         string $clientSecret,
-        string $sharepointSite
+        string $sharepointSite,
+        string $sharepointDocumentLibrary = ''
     )
     {
         $authService = new AuthenticationService();
@@ -33,7 +34,7 @@ class SharepointConnector
 
         // Get driveId by site
         $this->drive = new DriveService($accessToken);
-        $driveId = $this->drive->requestDriveId($siteId);
+        $driveId = $this->drive->requestDriveId($siteId, $sharepointDocumentLibrary);
         $this->drive->setDriveId($driveId);
 
         $this->folder = new FolderService($accessToken, $driveId);
